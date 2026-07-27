@@ -2,6 +2,8 @@
 
 **Group:** Group03
 **Live deployment:** https://auragtmai.com
+**Project Files & Demo (Drive):** https://drive.google.com/drive/folders/1g8ABW5rjP9wrdwEVPX0kWaU7a0yZzSSs
+# AuraGTM — AI Go-To-Market Strategy Agent
 
 AuraGTM is a retrieval-augmented generation (RAG) application that generates
 complete, evidence-grounded go-to-market strategies. It combines a hybrid
