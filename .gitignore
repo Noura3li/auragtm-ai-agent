@@ -1,0 +1,10 @@
+.env
+*.env
+__pycache__/
+*.pyc
+venv/
+.venv/
+vector_db/
+02_src/knowledge_base/
+02_src/08_Clients_Data/
+.DS_Store
