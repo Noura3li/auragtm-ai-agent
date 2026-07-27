@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuraGTM — Evidence-backed go-to-market strategy</title>
+<link rel="icon" type="image/png" href="/static/logo.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --navy:#1a3057; --navy-dark:#0f1e38; --blue:#2e6db4; --blue-light:#5b9bd5; --sky:#a8c8e8;
+  --card:#f5fafe; --border:#c4d8ec;
+  --text-dark:#0f1e38; --text-mid:#2d4a6b; --text-muted:#6f88a6; --white:#ffffff;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  color:var(--text-dark); font-family:'Inter',sans-serif; line-height:1.6;
+  -webkit-font-smoothing:antialiased; min-height:100vh;
+  background: linear-gradient(165deg, #f1f7fd 0%, #dde9f8 52%, #cadcf2 100%);
+  background-attachment: fixed;
+  animation: pageFadeIn 0.45s ease;
+}
+@keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { body { animation: none; } }
+html, body { overflow-x: hidden; max-width: 100%; }
+h1, h2, h3, p, .cite { overflow-wrap: break-word; }
+.hero-grid > *, .svc, .login-inner > * { min-width: 0; }
+h1,h2,h3 { letter-spacing:-0.02em; line-height:1.12; }
+.wrap { max-width:1140px; margin:0 auto; padding:0 28px; }
+
+.site-head { padding:34px 0 22px; text-align:center; background:linear-gradient(150deg,#ffffff 0%,#eaf2fb 50%,#d6e8f7 100%); }
+.logo-center { display:inline-block; text-decoration:none; }
+.logo-img-big { height:138px; width:auto; display:block; margin:0 auto; }
+.logo-text-big { font-weight:800; font-size:42px; color:var(--navy); letter-spacing:-0.02em; }
+.logo-text-big span { color:var(--blue); }
+.nav-band { background:linear-gradient(90deg,#1a3057 0%,#2e6db4 100%); box-shadow:0 6px 18px rgba(15,30,56,0.18); }
+.nav-band-inner { display:flex; justify-content:center; align-items:center; gap:30px; flex-wrap:wrap; padding:11px 0; min-height:56px; }
+.nav-band a.navlink { color:rgba(255,255,255,0.85); text-decoration:none; font-size:14px; font-weight:600; transition:color 0.15s; }
+.nav-band a.navlink:hover { color:#fff; }
+.nav-band a.navlink.active { color:#fff; position:relative; }
+.nav-band a.navlink.active::after { content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:#fff; border-radius:2px; }
+.nav-band .btn-cta { background:#fff; color:var(--navy); padding:9px 20px; border-radius:10px; font-size:14px; font-weight:700; text-decoration:none; box-shadow:0 4px 12px rgba(0,0,0,0.16); transition:transform 0.15s, box-shadow 0.15s; }
+.nav-band .btn-cta:hover { transform:translateY(-1px); box-shadow:0 8px 18px rgba(0,0,0,0.24); }
+
+.btn {
+  display:inline-block; font-family:'Inter',sans-serif; font-size:14px; font-weight:700;
+  text-decoration:none; padding:12px 24px; border-radius:12px; cursor:pointer;
+  border:1px solid transparent; transition:transform 0.18s, box-shadow 0.18s, filter 0.18s; white-space:nowrap;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #3a7fc4 0%, #1a3057 100%);
+  color:#fff; box-shadow:0 6px 18px rgba(26,48,87,0.30);
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 11px 28px rgba(26,48,87,0.42); filter:brightness(1.07); }
+.btn-ghost { background:rgba(255,255,255,0.7); color:var(--navy); border-color:var(--border); }
+.btn-ghost:hover { border-color:var(--blue); color:var(--blue); background:#fff; }
+.btn-lg { padding:15px 30px; font-size:15px; }
+
+.hero { position:relative; overflow:hidden; padding:34px 0 84px; }
+.hero::before { content:""; position:absolute; top:-160px; right:-120px; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle, rgba(46,109,180,0.16) 0%, transparent 68%); z-index:0; }
+.hero-grid { position:relative; z-index:1; display:grid; grid-template-columns:1.05fr 0.95fr; gap:52px; align-items:center; }
+.eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--blue); background:rgba(46,109,180,0.12); padding:6px 13px; border-radius:20px; margin-bottom:22px; }
+.eyebrow::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--blue); }
+h1.hero-title { font-size:50px; font-weight:800; color:var(--navy-dark); margin-bottom:20px; }
+h1.hero-title em { color:var(--blue); font-style:normal; }
+.hero-sub { font-size:18px; color:var(--text-mid); max-width:470px; margin-bottom:30px; }
+.hero-cta { display:flex; gap:14px; flex-wrap:wrap; }
+
+.proof-card { background:linear-gradient(160deg,var(--navy) 0%,var(--navy-dark) 100%); border-radius:20px; padding:26px; box-shadow:0 24px 60px rgba(15,30,56,0.30); }
+.proof-head { display:flex; align-items:center; gap:10px; padding-bottom:16px; margin-bottom:18px; border-bottom:1px solid rgba(255,255,255,0.12); }
+.proof-dot { width:9px; height:9px; border-radius:50%; background:var(--blue-light); }
+.proof-head span { color:rgba(255,255,255,0.6); font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; }
+.proof-section { color:var(--sky); font-size:13px; font-weight:700; margin-bottom:10px; }
+.proof-text { color:rgba(255,255,255,0.9); font-size:14.5px; line-height:1.7; }
+.proof-foot { margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.55); font-size:12px; }
+.proof-foot strong { color:rgba(255,255,255,0.85); font-weight:600; }
+
+/* Public impact stats */
+.stats-bar { padding: 0 0 8px; }
+.stats-inner {
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+  padding: 32px; box-shadow: 0 6px 24px rgba(15,30,56,0.06);
+}
+.stats-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 26px; }
+.stat-card {
+  display: flex; align-items: center; gap: 14px;
+  background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  padding: 18px; transition: transform 0.18s, box-shadow 0.18s;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(15,30,56,0.1); }
+.stat-icon {
+  width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.stat-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
+.stat-card.c1 .stat-icon { background: linear-gradient(135deg, #1a3057, #0f1e38); }
+.stat-card.c2 .stat-icon { background: linear-gradient(135deg, #2e6db4, #1a3057); }
+.stat-card.c3 .stat-icon { background: linear-gradient(135deg, #5b9bd5, #2e6db4); }
+.stat-card .num { font-size: 26px; font-weight: 800; color: var(--navy-dark); line-height: 1.1; }
+.stat-card .lbl { font-size: 12px; color: var(--text-mid); font-weight: 600; margin-top: 2px; }
+
+.stats-chart { border-top: 1px solid var(--border); padding-top: 22px; }
+.chart-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.chart-row:last-child { margin-bottom: 0; }
+.chart-label { width: 150px; flex-shrink: 0; font-size: 12.5px; font-weight: 700; color: var(--text-mid); }
+.chart-track { flex: 1; background: #eef3fa; border-radius: 8px; height: 14px; overflow: hidden; }
+.chart-fill { height: 100%; border-radius: 8px; width: 0%; transition: width 0.8s ease; }
+.chart-fill.c1 { background: linear-gradient(90deg, #1a3057, #0f1e38); }
+.chart-fill.c2 { background: linear-gradient(90deg, #2e6db4, #1a3057); }
+.chart-fill.c3 { background: linear-gradient(90deg, #5b9bd5, #2e6db4); }
+.chart-val { width: 32px; text-align: right; font-size: 13px; font-weight: 700; color: var(--navy); }
+
+@media (max-width: 700px) {
+  .stats-cards { grid-template-columns: 1fr; }
+  .chart-label { width: 110px; font-size: 11.5px; }
+}
+
+.intro { padding: 0 0 68px; }
+.intro-inner { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:46px 50px; box-shadow:0 6px 24px rgba(15,30,56,0.06); }
+.section-eyebrow { font-size:12px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--blue); margin-bottom:14px; }
+.intro h2 { font-weight:800; font-size:30px; color:var(--navy-dark); margin-bottom:14px; max-width:640px; }
+.intro p { color:var(--text-mid); font-size:16.5px; max-width:680px; }
+
+.services { padding:18px 0 80px; }
+.services-head { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:34px; flex-wrap:wrap; }
+.services-head h2 { font-weight:800; font-size:30px; color:var(--navy-dark); }
+.svc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+.svc { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:26px; transition:transform 0.18s, box-shadow 0.18s, border-color 0.18s; box-shadow:0 4px 18px rgba(15,30,56,0.05); }
+.svc:hover { transform:translateY(-3px); box-shadow:0 16px 36px rgba(15,30,56,0.13); border-color:var(--blue-light); }
+.svc-mark { width:42px; height:42px; border-radius:11px; background:linear-gradient(135deg,var(--navy),var(--blue)); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+.svc-mark svg { width:21px; height:21px; stroke:#fff; fill:none; stroke-width:2; }
+.svc h3 { font-weight:700; font-size:18px; color:var(--navy-dark); margin-bottom:7px; }
+.svc p { color:var(--text-mid); font-size:14.5px; }
+
+.login { padding:0 0 88px; }
+.login-inner { background:linear-gradient(150deg,var(--navy) 0%,var(--navy-dark) 100%); border-radius:22px; overflow:hidden; display:grid; grid-template-columns:1.1fr 0.9fr; box-shadow:0 24px 60px rgba(15,30,56,0.28); }
+.login-copy { padding:50px; color:#fff; }
+.login-copy .section-eyebrow { color:var(--sky); }
+.login-copy h2 { font-weight:800; font-size:30px; margin-bottom:12px; }
+.login-copy p { color:rgba(255,255,255,0.72); font-size:16px; max-width:360px; }
+
+.auth-panel {
+  background: rgba(255,255,255,0.06);
+  border-left: 1px solid rgba(255,255,255,0.1);
+  padding: 42px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.auth-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+  background: rgba(255,255,255,0.08);
+  padding: 6px;
+  border-radius: 14px;
+}
+.auth-tabs button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(255,255,255,0.65);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+.auth-tabs button.active {
+  background: #ffffff;
+  color: var(--navy);
+}
+
+.login-form {
+  background: transparent;
+  border-left: none;
+  padding: 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.login-form.hidden { display:none; }
+.login-form label { display:block; color:rgba(255,255,255,0.8); font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:7px; margin-top:16px; }
+.login-form label:first-child { margin-top:0; }
+.login-form input { width:100%; padding:12px 14px; font-size:14px; font-family:'Inter',sans-serif; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:#fff; outline:none; transition:border-color 0.15s, background 0.15s; }
+.login-form input::placeholder { color:rgba(255,255,255,0.45); }
+.login-form input:focus { border-color:var(--blue-light); background:rgba(255,255,255,0.15); }
+.login-form .btn-signin { width:100%; text-align:center; margin-top:24px; padding:14px; background:#fff; color:var(--navy); font-weight:700; border:none; border-radius:11px; font-size:14px; cursor:pointer; transition:transform 0.15s, box-shadow 0.15s; }
+.login-form .btn-signin:hover { transform:translateY(-1px); box-shadow:0 8px 20px rgba(0,0,0,0.18); }
+.login-note { color:rgba(255,255,255,0.5); font-size:12.5px; text-align:center; margin-top:16px; }
+
+
+
+.reveal { opacity:0; transform:translateY(16px); animation:rise 0.7s ease forwards; }
+.reveal.d1 { animation-delay:0.08s; } .reveal.d2 { animation-delay:0.16s; } .reveal.d3 { animation-delay:0.24s; }
+@keyframes rise { to { opacity:1; transform:translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .reveal { animation:none; opacity:1; transform:none; } html { scroll-behavior:auto; } }
+
+@media (max-width:880px) {
+  .hero-grid, .login-inner, .svc-grid { grid-template-columns:1fr; }
+  h1.hero-title { font-size:38px; }
+  .logo-img-big { height:96px; }
+  .auth-panel { border-left:none; border-top:1px solid rgba(255,255,255,0.1); }
+  .intro-inner, .login-copy { padding:32px; }
+}
+@media (max-width:600px) {
+  .nav-band-inner { gap:16px; }
+}
+
+/* Ask AuraGTM teaser widget */
+.chat-launcher {
+  position: fixed; bottom: 24px; right: 24px; z-index: 100;
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 20px 13px 16px;
+  background: linear-gradient(135deg, #1a3057 0%, #2e6db4 100%);
+  color: #fff; border: none; border-radius: 30px;
+  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+  cursor: pointer; box-shadow: 0 6px 22px rgba(15,30,56,0.32);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.chat-launcher:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(15,30,56,0.4); }
+.chat-launcher svg { width: 20px; height: 20px; }
+.chat-launcher.hidden { display: none; }
+
+.teaser-panel {
+  position: fixed; bottom: 24px; right: 24px; z-index: 101;
+  width: 320px; max-width: calc(100vw - 32px);
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden;
+  box-shadow: 0 16px 44px rgba(15,30,56,0.3);
+  display: none; flex-direction: column;
+}
+.teaser-panel.open { display: flex; }
+.teaser-head {
+  background: linear-gradient(135deg, #1a3057 0%, #2e6db4 100%);
+  padding: 16px 18px; display: flex; align-items: center; gap: 12px;
+}
+.teaser-head-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.teaser-head-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
+.teaser-head-text { flex: 1; }
+.teaser-head-title { color: #fff; font-size: 14px; font-weight: 700; }
+.teaser-head-sub { color: rgba(255,255,255,0.75); font-size: 11px; margin-top: 2px; }
+.teaser-close {
+  background: rgba(255,255,255,0.12); border: none; color: #fff;
+  width: 26px; height: 26px; border-radius: 7px; cursor: pointer; font-size: 17px; line-height: 1;
+}
+.teaser-body { padding: 20px; }
+.teaser-body p { font-size: 13.5px; color: var(--text-mid); line-height: 1.65; margin-bottom: 16px; }
+.teaser-body .btn { width: 100%; text-align: center; }
+
+/* Footer + compact contact */
+footer { border-top:1px solid var(--border); padding:46px 0 28px; background:transparent; }
+.foot-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:40px; align-items:start; }
+.foot-brand p { color:var(--text-muted); font-size:13px; margin-top:8px; }
+.foot-brand .foot-logo { display:inline-flex; align-items:center; text-decoration:none; }
+.foot-contact h3 { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--blue); margin-bottom:14px; }
+.foot-contact-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.contact-form input, .contact-form textarea {
+  width:100%; padding:10px 12px; font-size:13px; font-family:'Inter',sans-serif;
+  background:#fff; border:1.5px solid var(--border); border-radius:9px;
+  color:var(--text-dark); outline:none; transition:border-color 0.15s; margin-bottom:10px;
+}
+.contact-form textarea { resize:vertical; min-height:70px; }
+.contact-form input:focus, .contact-form textarea:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(46,109,180,0.10); }
+.contact-form button {
+  padding:10px 22px; background:linear-gradient(135deg,#3a7fc4,#1a3057); color:#fff;
+  border:none; border-radius:9px; font-size:13px; font-weight:700; cursor:pointer; transition:opacity 0.2s;
+}
+.contact-form button:disabled { opacity:0.6; cursor:not-allowed; }
+.contact-status { margin-top:10px; font-size:12.5px; display:none; }
+.contact-status.ok { color:#1e7e4a; display:block; }
+.contact-status.err { color:#c0392b; display:block; }
+.foot-bottom { border-top:1px solid var(--border); margin-top:34px; padding-top:18px; text-align:center; }
+.foot-bottom p { color:var(--text-muted); font-size:12.5px; }
+@media (max-width:700px) { .foot-grid { grid-template-columns:1fr; } .foot-contact-row { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a href="/" class="logo-center">
+      <img src="/static/logo.png" alt="AuraGTM" class="logo-img-big"
+           onerror="this.style.display='none'; document.getElementById('logo-text').style.display='inline-block';">
+      <span id="logo-text" class="logo-text-big" style="display:none;">Aura<span>GTM</span></span>
+    </a>
+  </div>
+</header>
+
+<div class="nav-band">
+  <div class="wrap nav-band-inner">
+    <a class="navlink active" href="/">Home</a>
+    <a class="navlink" href="/services">Services</a>
+    <a class="navlink" href="#contact">Contact</a>
+    <a class="navlink" href="#login">Login</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow reveal">Evidence-backed GTM</div>
+      <h1 class="hero-title reveal d1">Go-to-market strategy that <em>shows its work.</em></h1>
+      <p class="hero-sub reveal d2">AuraGTM turns your market knowledge into a full GTM plan — with every recommendation traced to the document it came from.</p>
+      <div class="hero-cta reveal d3">
+        <a href="#login" class="btn btn-primary btn-lg">Login</a>
+        <a href="/services" class="btn btn-ghost btn-lg">See services</a>
+      </div>
+    </div>
+
+    <div class="proof-card reveal d2">
+      <div class="proof-head"><span class="proof-dot"></span><span>Strategy excerpt</span></div>
+      <div class="proof-section">Positioning &amp; Messaging</div>
+      <p class="proof-text">Lead with cost-efficiency and retail-specific analytics for younger Saudi buyers, where price matching and click-and-mortar experiences drive adoption.</p>
+      <div class="proof-foot">Every recommendation is grounded in real, cited sources.</div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="wrap">
+    <div class="stats-inner reveal">
+      <div class="stats-cards">
+        <div class="stat-card c1">
+          <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div><div class="num" id="stat-strategies">—</div><div class="lbl">Strategies Generated</div></div>
+        </div>
+        <div class="stat-card c2">
+          <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
+          <div><div class="num" id="stat-industries">—</div><div class="lbl">Industries Covered</div></div>
+        </div>
+        <div class="stat-card c3">
+          <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><div class="num" id="stat-clients">—</div><div class="lbl">Clients Served</div></div>
+        </div>
+      </div>
+      <div class="stats-chart">
+        <div class="chart-row">
+          <div class="chart-label">Strategies Generated</div>
+          <div class="chart-track"><div class="chart-fill c1" id="bar-strategies"></div></div>
+          <div class="chart-val" id="val-strategies">0</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-label">Industries Covered</div>
+          <div class="chart-track"><div class="chart-fill c2" id="bar-industries"></div></div>
+          <div class="chart-val" id="val-industries">0</div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-label">Clients Served</div>
+          <div class="chart-track"><div class="chart-fill c3" id="bar-clients"></div></div>
+          <div class="chart-val" id="val-clients">0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  fetch('/site-stats').then(r => r.json()).then(data => {
+    if (!data.success) return;
+    const s = data.total_strategies, i = data.industries_covered, c = data.clients_served;
+    document.getElementById('stat-strategies').textContent = s;
+    document.getElementById('stat-industries').textContent = i;
+    document.getElementById('stat-clients').textContent = c;
+
+    const max = Math.max(s, i, c, 1);
+    const pct = v => Math.max(v > 0 ? 6 : 0, Math.round((v / max) * 100));
+
+    document.getElementById('val-strategies').textContent = s;
+    document.getElementById('val-industries').textContent = i;
+    document.getElementById('val-clients').textContent = c;
+
+    requestAnimationFrame(() => {
+      document.getElementById('bar-strategies').style.width = pct(s) + '%';
+      document.getElementById('bar-industries').style.width = pct(i) + '%';
+      document.getElementById('bar-clients').style.width = pct(c) + '%';
+    });
+  }).catch(() => {});
+</script>
+
+<section class="intro">
+  <div class="wrap">
+    <div class="intro-inner reveal">
+      <div class="section-eyebrow">What AuraGTM is</div>
+      <h2>Grounded in real knowledge, not guesswork.</h2>
+      <p>AuraGTM draws on a curated knowledge base of GTM frameworks, market reports, and competitor intelligence — then builds a full strategy on top, citing every source. A plan you can actually defend.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="wrap">
+    <div class="services-head">
+      <div>
+        <div class="section-eyebrow">What you can do</div>
+        <h2>Strategy you can trust</h2>
+      </div>
+      <a href="/services" class="btn btn-ghost">Explore the services</a>
+    </div>
+
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h3>Source-cited strategy</h3>
+        <p>A full GTM plan where every recommendation links to its source document and page.</p>
+      </div>
+      <div class="svc reveal d1">
+        <div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Ask AuraGTM</h3>
+        <p>A GTM assistant that answers your strategy questions, with sources shown.</p>
+      </div>
+      <div class="svc reveal d2">
+        <div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7"/></svg></div>
+        <h3>Client intelligence</h3>
+        <p>Add a client's documents for a strategy built around their real capabilities.</p>
+      </div>
+      <div class="svc reveal d3">
+        <div class="svc-mark"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Market grounding</h3>
+        <p>Hybrid search surfaces the right market and competitor evidence every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="login" id="login">
+  <div class="wrap">
+    <div class="login-inner reveal">
+
+      <div class="login-copy">
+        <div class="section-eyebrow">Member access</div>
+        <h2>Welcome to AuraGTM</h2>
+        <p>
+          Sign in or create an account to generate GTM strategies,
+          manage client knowledge, and save project history.
+        </p>
+      </div>
+
+      <div class="auth-panel">
+
+        <div class="auth-tabs">
+          <button type="button" id="loginTab" class="active">Login</button>
+          <button type="button" id="signupTab">Sign Up</button>
+        </div>
+
+        <form id="loginForm" class="login-form" method="post" action="/login">
+        <label for="email">Username or Email</label>
+        <input
+          id="email"
+          name="email"
+          type="text"
+          placeholder="Username or email"
+          autocomplete="username"
+          required
+        >
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Your password" autocomplete="current-password" required>
+
+          <button class="btn-signin" type="submit">Sign In</button>
+
+          <div class="login-error" id="login-error" style="display:none; color:#ffd2d2; font-size:13px; text-align:center; margin-top:12px;">
+            Incorrect email or password. Please try again.
+          </div>
+        </form>
+
+        <form id="signupForm" class="login-form hidden" method="post" action="/register">
+          <label for="reg_username">Username</label>
+          <input id="reg_username" name="username" type="text" placeholder="Your name" autocomplete="name" required>
+
+          <label for="reg_email">Email</label>
+          <input id="reg_email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+
+          <label for="reg_password">Password</label>
+          <input id="reg_password" name="password" type="password" placeholder="Create password" autocomplete="new-password" required>
+
+          <button class="btn-signin" type="submit">Create Account</button>
+
+          <div class="login-error" id="register-error" style="display:none; color:#ffd2d2; font-size:13px; text-align:center; margin-top:12px;">
+            This email already exists. Please sign in instead.
+          </div>
+        </form>
+
+      </div>
+
+      <script>
+        const loginTab = document.getElementById("loginTab");
+        const signupTab = document.getElementById("signupTab");
+        const loginForm = document.getElementById("loginForm");
+        const signupForm = document.getElementById("signupForm");
+
+        loginTab.addEventListener("click", function () {
+          loginTab.classList.add("active");
+          signupTab.classList.remove("active");
+          loginForm.classList.remove("hidden");
+          signupForm.classList.add("hidden");
+        });
+
+        signupTab.addEventListener("click", function () {
+          signupTab.classList.add("active");
+          loginTab.classList.remove("active");
+          signupForm.classList.remove("hidden");
+          loginForm.classList.add("hidden");
+        });
+
+        const params = new URLSearchParams(location.search);
+
+        if (params.get("error")) {
+          const le = document.getElementById("login-error");
+          if (le) le.style.display = "block";
+        }
+
+        if (params.get("register_error")) {
+          signupTab.click();
+          const re = document.getElementById("register-error");
+          if (re) re.style.display = "block";
+        }
+      </script>
+
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a href="/" class="foot-logo">
+        <img src="/static/logo.png" alt="AuraGTM" style="height:46px;"
+             onerror="this.style.display='none'; document.getElementById('foot-logo-text').style.display='inline';">
+        <span id="foot-logo-text" class="logo-text-big" style="display:none; font-size:20px;">Aura<span>GTM</span></span>
+      </a>
+      <p>Where AI meets go-to-market strategy.</p>
+    </div>
+    <div class="foot-contact" id="contact">
+      <h3>Have a question?</h3>
+      <form class="contact-form" id="contactForm">
+        <div class="foot-contact-row">
+          <input id="contact_name" type="text" placeholder="Your name" required>
+          <input id="contact_email" type="email" placeholder="you@company.com" required>
+        </div>
+        <textarea id="contact_message" placeholder="How can we help?" required></textarea>
+        <button type="submit" id="contact_submit">Send Message</button>
+        <div class="contact-status" id="contact_status"></div>
+      </form>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>&copy; 2026 AuraGTM</p>
+    <p style="margin-top:4px;">Developed by AuraGTM Team</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contact_submit');
+    const status = document.getElementById('contact_status');
+    status.className = 'contact-status';
+    status.textContent = '';
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: document.getElementById('contact_name').value,
+          email: document.getElementById('contact_email').value,
+          message: document.getElementById('contact_message').value
+        })
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error || 'Something went wrong.');
+      status.textContent = data.message || 'Thanks! Your message has been sent.';
+      status.className = 'contact-status ok';
+      document.getElementById('contactForm').reset();
+    } catch (err) {
+      status.textContent = 'Error: ' + err.message;
+      status.className = 'contact-status err';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    }
+  });
+</script>
+
+<button class="chat-launcher" id="chat-launcher" onclick="toggleTeaser(true)" aria-label="Ask AuraGTM">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  Ask AuraGTM
+</button>
+
+<div class="teaser-panel" id="teaser-panel" role="dialog" aria-label="Ask AuraGTM">
+  <div class="teaser-head">
+    <div class="teaser-head-icon">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <div class="teaser-head-text">
+      <div class="teaser-head-title">Ask AuraGTM</div>
+      <div class="teaser-head-sub">Your go-to-market strategy assistant</div>
+    </div>
+    <button class="teaser-close" onclick="toggleTeaser(false)" aria-label="Close">&times;</button>
+  </div>
+  <div class="teaser-body">
+    <p>Ask AuraGTM is available inside the workspace, where it answers from your knowledge base and shows the right context for your account.</p>
+    <a href="#login" class="btn btn-primary" onclick="toggleTeaser(false)">Sign in to start chatting</a>
+  </div>
+</div>
+
+<script>
+  function toggleTeaser(open) {
+    document.getElementById('teaser-panel').classList.toggle('open', open);
+    document.getElementById('chat-launcher').classList.toggle('hidden', open);
+  }
+</script>
+
+</body>
+</html>

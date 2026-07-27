@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuraGTM — Services</title>
+<link rel="icon" type="image/png" href="/static/logo.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --navy:#1a3057; --navy-dark:#0f1e38; --blue:#2e6db4; --blue-light:#5b9bd5; --sky:#a8c8e8;
+  --card:#f5fafe; --border:#c4d8ec;
+  --text-dark:#0f1e38; --text-mid:#2d4a6b; --text-muted:#6f88a6; --white:#ffffff;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  color:var(--text-dark); font-family:'Inter',sans-serif; line-height:1.6;
+  -webkit-font-smoothing:antialiased; min-height:100vh;
+  background: linear-gradient(165deg, #f1f7fd 0%, #dde9f8 52%, #cadcf2 100%);
+  background-attachment: fixed;
+  animation: pageFadeIn 0.45s ease;
+}
+@keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { body { animation: none; } }
+html, body { overflow-x: hidden; max-width: 100%; }
+h1, h2, h3, p { overflow-wrap: break-word; }
+.svc-grid > *, .steps > * { min-width: 0; }
+h1,h2,h3 { letter-spacing:-0.02em; line-height:1.12; }
+.wrap { max-width:1140px; margin:0 auto; padding:0 28px; }
+
+.site-head { padding:34px 0 22px; text-align:center; background:linear-gradient(150deg,#ffffff 0%,#eaf2fb 50%,#d6e8f7 100%); }
+.logo-center { display:inline-block; text-decoration:none; }
+.logo-img-big { height:138px; width:auto; display:block; margin:0 auto; }
+.logo-text-big { font-weight:800; font-size:42px; color:var(--navy); letter-spacing:-0.02em; }
+.logo-text-big span { color:var(--blue); }
+.nav-band { background:linear-gradient(90deg,#1a3057 0%,#2e6db4 100%); box-shadow:0 6px 18px rgba(15,30,56,0.18); }
+.nav-band-inner { display:flex; justify-content:center; align-items:center; gap:30px; flex-wrap:wrap; padding:11px 0; min-height:56px; }
+.nav-band a.navlink { color:rgba(255,255,255,0.85); text-decoration:none; font-size:14px; font-weight:600; transition:color 0.15s; }
+.nav-band a.navlink:hover { color:#fff; }
+.nav-band a.navlink.active { color:#fff; position:relative; }
+.nav-band a.navlink.active::after { content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:#fff; border-radius:2px; }
+
+.btn { display:inline-block; font-family:'Inter',sans-serif; font-size:14px; font-weight:700; text-decoration:none; padding:12px 24px; border-radius:12px; cursor:pointer; border:1px solid transparent; transition:transform 0.18s, box-shadow 0.18s, filter 0.18s; white-space:nowrap; }
+.btn-primary { background:linear-gradient(135deg,#3a7fc4 0%,#1a3057 100%); color:#fff; box-shadow:0 6px 18px rgba(26,48,87,0.30); }
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 11px 28px rgba(26,48,87,0.42); filter:brightness(1.07); }
+.btn-ghost { background:rgba(255,255,255,0.7); color:var(--navy); border-color:var(--border); }
+.btn-ghost:hover { border-color:var(--blue); color:var(--blue); background:#fff; }
+.btn-lg { padding:15px 30px; font-size:15px; }
+
+.page-head { position:relative; overflow:hidden; padding:26px 0 44px; }
+.page-head::before { content:""; position:absolute; top:-150px; right:-120px; width:440px; height:440px; border-radius:50%; background:radial-gradient(circle, rgba(46,109,180,0.15) 0%, transparent 68%); }
+.page-head-inner { position:relative; z-index:1; max-width:680px; }
+.eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--blue); background:rgba(46,109,180,0.12); padding:6px 13px; border-radius:20px; margin-bottom:20px; }
+.eyebrow::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--blue); }
+.page-head h1 { font-size:44px; font-weight:800; color:var(--navy-dark); margin-bottom:16px; }
+.page-head p { font-size:18px; color:var(--text-mid); max-width:560px; }
+
+.services { padding:20px 0 70px; }
+.svc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.svc { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:30px; transition:transform 0.18s, box-shadow 0.18s, border-color 0.18s; box-shadow:0 4px 18px rgba(15,30,56,0.05); }
+.svc:hover { transform:translateY(-3px); box-shadow:0 16px 36px rgba(15,30,56,0.13); border-color:var(--blue-light); }
+.svc-mark { width:46px; height:46px; border-radius:12px; background:linear-gradient(135deg,var(--navy),var(--blue)); display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+.svc-mark svg { width:22px; height:22px; stroke:#fff; fill:none; stroke-width:2; }
+.svc h3 { font-weight:700; font-size:19px; color:var(--navy-dark); margin-bottom:9px; }
+.svc > p { color:var(--text-mid); font-size:15px; margin-bottom:16px; }
+.svc ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+.svc li { position:relative; padding-left:22px; color:var(--text-mid); font-size:14px; }
+.svc li::before { content:""; position:absolute; left:0; top:7px; width:11px; height:11px; border-radius:3px; background:rgba(46,109,180,0.18); border:1px solid var(--blue); }
+
+.how { padding:20px 0 80px; }
+.how-head { text-align:center; margin-bottom:40px; }
+.how-head .section-eyebrow { font-size:12px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--blue); margin-bottom:12px; }
+.how-head h2 { font-weight:800; font-size:30px; color:var(--navy-dark); }
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.step { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px; box-shadow:0 4px 18px rgba(15,30,56,0.05); }
+.step-num { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:9px; background:linear-gradient(135deg,var(--blue),var(--navy)); color:#fff; font-weight:700; font-size:15px; margin-bottom:16px; }
+.step h3 { font-weight:700; font-size:17px; color:var(--navy-dark); margin-bottom:7px; }
+.step p { color:var(--text-mid); font-size:14.5px; }
+
+.cta { padding:0 0 90px; }
+.cta-inner { background:linear-gradient(150deg,var(--navy) 0%,var(--navy-dark) 100%); border-radius:22px; padding:54px; text-align:center; box-shadow:0 24px 60px rgba(15,30,56,0.28); }
+.cta-inner h2 { color:#fff; font-weight:800; font-size:30px; margin-bottom:12px; }
+.cta-inner p { color:rgba(255,255,255,0.72); font-size:16px; max-width:460px; margin:0 auto 26px; }
+.cta-row { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+.btn-light { background:#fff; color:var(--navy); }
+.btn-light:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,0.2); }
+.btn-outline { background:transparent; color:#fff; border-color:rgba(255,255,255,0.4); }
+.btn-outline:hover { border-color:#fff; background:rgba(255,255,255,0.08); }
+
+footer { border-top:1px solid var(--border); padding:46px 0 28px; background:transparent; }
+.foot-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:40px; align-items:start; }
+.foot-brand p { color:var(--text-muted); font-size:13px; margin-top:8px; }
+.foot-brand .foot-logo { display:inline-flex; align-items:center; text-decoration:none; }
+.foot-contact h3 { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--blue); margin-bottom:14px; }
+.foot-contact-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.contact-form input, .contact-form textarea {
+  width:100%; padding:10px 12px; font-size:13px; font-family:'Inter',sans-serif;
+  background:#fff; border:1.5px solid var(--border); border-radius:9px;
+  color:var(--text-dark); outline:none; transition:border-color 0.15s; margin-bottom:10px;
+}
+.contact-form textarea { resize:vertical; min-height:70px; }
+.contact-form input:focus, .contact-form textarea:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(46,109,180,0.10); }
+.contact-form button {
+  padding:10px 22px; background:linear-gradient(135deg,#3a7fc4,#1a3057); color:#fff;
+  border:none; border-radius:9px; font-size:13px; font-weight:700; cursor:pointer; transition:opacity 0.2s;
+}
+.contact-form button:disabled { opacity:0.6; cursor:not-allowed; }
+.contact-status { margin-top:10px; font-size:12.5px; display:none; }
+.contact-status.ok { color:#1e7e4a; display:block; }
+.contact-status.err { color:#c0392b; display:block; }
+.foot-bottom { border-top:1px solid var(--border); margin-top:34px; padding-top:18px; text-align:center; }
+.foot-bottom p { color:var(--text-muted); font-size:12.5px; }
+@media (max-width:700px) { .foot-grid { grid-template-columns:1fr; } .foot-contact-row { grid-template-columns:1fr; } }
+
+.reveal { opacity:0; transform:translateY(16px); animation:rise 0.7s ease forwards; }
+.reveal.d1 { animation-delay:0.08s; } .reveal.d2 { animation-delay:0.16s; } .reveal.d3 { animation-delay:0.24s; }
+@keyframes rise { to { opacity:1; transform:translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .reveal { animation:none; opacity:1; transform:none; } html { scroll-behavior:auto; } }
+
+@media (max-width:880px) {
+  .svc-grid, .steps { grid-template-columns:1fr; }
+  .page-head h1 { font-size:34px; }
+  .logo-img-big { height:96px; }
+  .cta-inner { padding:36px; }
+}
+@media (max-width:600px) {
+  .nav-band-inner { gap:16px; }
+}
+
+/* Ask AuraGTM teaser widget */
+.chat-launcher {
+  position: fixed; bottom: 24px; right: 24px; z-index: 100;
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 20px 13px 16px;
+  background: linear-gradient(135deg, #1a3057 0%, #2e6db4 100%);
+  color: #fff; border: none; border-radius: 30px;
+  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+  cursor: pointer; box-shadow: 0 6px 22px rgba(15,30,56,0.32);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.chat-launcher:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(15,30,56,0.4); }
+.chat-launcher svg { width: 20px; height: 20px; }
+.chat-launcher.hidden { display: none; }
+
+.teaser-panel {
+  position: fixed; bottom: 24px; right: 24px; z-index: 101;
+  width: 320px; max-width: calc(100vw - 32px);
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden;
+  box-shadow: 0 16px 44px rgba(15,30,56,0.3);
+  display: none; flex-direction: column;
+}
+.teaser-panel.open { display: flex; }
+.teaser-head {
+  background: linear-gradient(135deg, #1a3057 0%, #2e6db4 100%);
+  padding: 16px 18px; display: flex; align-items: center; gap: 12px;
+}
+.teaser-head-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.teaser-head-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
+.teaser-head-text { flex: 1; }
+.teaser-head-title { color: #fff; font-size: 14px; font-weight: 700; }
+.teaser-head-sub { color: rgba(255,255,255,0.75); font-size: 11px; margin-top: 2px; }
+.teaser-close {
+  background: rgba(255,255,255,0.12); border: none; color: #fff;
+  width: 26px; height: 26px; border-radius: 7px; cursor: pointer; font-size: 17px; line-height: 1;
+}
+.teaser-body { padding: 20px; }
+.teaser-body p { font-size: 13.5px; color: var(--text-mid); line-height: 1.65; margin-bottom: 16px; }
+.teaser-body .btn { width: 100%; text-align: center; }
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a href="/" class="logo-center">
+      <img src="/static/logo.png" alt="AuraGTM" class="logo-img-big"
+           onerror="this.style.display='none'; document.getElementById('logo-text').style.display='inline-block';">
+      <span id="logo-text" class="logo-text-big" style="display:none;">Aura<span>GTM</span></span>
+    </a>
+  </div>
+</header>
+
+<div class="nav-band">
+  <div class="wrap nav-band-inner">
+    <a class="navlink" href="/">Home</a>
+    <a class="navlink active" href="/services">Services</a>
+    <a class="navlink" href="#contact">Contact</a>
+    <a class="navlink" href="/#login">Login</a>
+  </div>
+</div>
+
+<section class="page-head">
+  <div class="wrap page-head-inner">
+    <div class="eyebrow reveal">Services</div>
+    <h1 class="reveal d1">Everything AuraGTM does for your go-to-market.</h1>
+    <p class="reveal d2">From a full cited strategy to instant answers — all grounded in your knowledge base, never invented.</p>
+  </div>
+</section>
+
+<section class="services">
+  <div class="wrap">
+    <div class="svc-grid">
+
+      <div class="svc reveal">
+        <div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <h3>Source-cited GTM strategy</h3>
+        <p>A complete go-to-market plan, built on real evidence.</p>
+        <ul>
+          <li>Audience, personas, positioning, channels, and roadmap</li>
+          <li>Every recommendation cited to its document and page</li>
+          <li>A short reason behind each major decision</li>
+        </ul>
+      </div>
+
+      <div class="svc reveal d1">
+        <div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Ask AuraGTM</h3>
+        <p>A GTM assistant for quick, grounded answers.</p>
+        <ul>
+          <li>Ask about positioning, channels, market entry, competitors</li>
+          <li>Answers drawn from the same knowledge base</li>
+          <li>Sources shown under every reply</li>
+        </ul>
+      </div>
+
+      <div class="svc reveal d2">
+        <div class="svc-mark"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7"/></svg></div>
+        <h3>Client-specific intelligence</h3>
+        <p>Strategy shaped around one client's real capabilities.</p>
+        <ul>
+          <li>Upload a client's own documents</li>
+          <li>Their knowledge stays separate and private</li>
+          <li>The plan reflects their projects and strengths</li>
+        </ul>
+      </div>
+
+      <div class="svc reveal d3">
+        <div class="svc-mark"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Market &amp; competitor grounding</h3>
+        <p>The right evidence, surfaced every time.</p>
+        <ul>
+          <li>Hybrid search blends meaning and exact keywords</li>
+          <li>Curated market and competitor knowledge</li>
+          <li>Focused on the Saudi and GCC market</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <div class="how-head">
+      <div class="section-eyebrow">How it works</div>
+      <h2>From product to cited strategy in three steps</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Describe your product</h3>
+        <p>Enter your product, industry, region, and goal.</p>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-num">2</div>
+        <h3>It finds the evidence</h3>
+        <p>AuraGTM retrieves the most relevant knowledge for your case.</p>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num">3</div>
+        <h3>You get a cited plan</h3>
+        <p>A full GTM strategy, with every claim linked to its source.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="cta-inner reveal">
+      <h2>Ready to build your strategy?</h2>
+      <p>Open the workspace and generate your first source-cited GTM plan.</p>
+      <div class="cta-row">
+        <a href="/#login" class="btn btn-lg btn-light">Login</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a href="/" class="foot-logo">
+        <img src="/static/logo.png" alt="AuraGTM" style="height:46px;"
+             onerror="this.style.display='none'; document.getElementById('foot-logo-text').style.display='inline';">
+        <span id="foot-logo-text" class="logo-text-big" style="display:none; font-size:20px;">Aura<span>GTM</span></span>
+      </a>
+      <p>Where AI meets go-to-market strategy.</p>
+    </div>
+    <div class="foot-contact" id="contact">
+      <h3>Have a question?</h3>
+      <form class="contact-form" id="contactForm">
+        <div class="foot-contact-row">
+          <input id="contact_name" type="text" placeholder="Your name" required>
+          <input id="contact_email" type="email" placeholder="you@company.com" required>
+        </div>
+        <textarea id="contact_message" placeholder="How can we help?" required></textarea>
+        <button type="submit" id="contact_submit">Send Message</button>
+        <div class="contact-status" id="contact_status"></div>
+      </form>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>&copy; 2026 AuraGTM</p>
+    <p style="margin-top:4px;">Developed by AuraGTM Team</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contact_submit');
+    const status = document.getElementById('contact_status');
+    status.className = 'contact-status';
+    status.textContent = '';
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: document.getElementById('contact_name').value,
+          email: document.getElementById('contact_email').value,
+          message: document.getElementById('contact_message').value
+        })
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error || 'Something went wrong.');
+      status.textContent = data.message || 'Thanks! Your message has been sent.';
+      status.className = 'contact-status ok';
+      document.getElementById('contactForm').reset();
+    } catch (err) {
+      status.textContent = 'Error: ' + err.message;
+      status.className = 'contact-status err';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    }
+  });
+</script>
+
+<button class="chat-launcher" id="chat-launcher" onclick="toggleTeaser(true)" aria-label="Ask AuraGTM">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  Ask AuraGTM
+</button>
+
+<div class="teaser-panel" id="teaser-panel" role="dialog" aria-label="Ask AuraGTM">
+  <div class="teaser-head">
+    <div class="teaser-head-icon">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </div>
+    <div class="teaser-head-text">
+      <div class="teaser-head-title">Ask AuraGTM</div>
+      <div class="teaser-head-sub">Your go-to-market strategy assistant</div>
+    </div>
+    <button class="teaser-close" onclick="toggleTeaser(false)" aria-label="Close">&times;</button>
+  </div>
+  <div class="teaser-body">
+    <p>Ask AuraGTM is available inside the workspace, where it answers from your knowledge base and shows the right context for your account.</p>
+    <a href="/#login" class="btn btn-primary">Sign in to start chatting</a>
+  </div>
+</div>
+
+<script>
+  function toggleTeaser(open) {
+    document.getElementById('teaser-panel').classList.toggle('open', open);
+    document.getElementById('chat-launcher').classList.toggle('hidden', open);
+  }
+</script>
+
+</body>
+</html>
